@@ -18,13 +18,13 @@ import {
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import{ AuthContext } from '../components/context';
+import UserContext from'../context/userContext/UserContext'; 
 
 export function DrawerContent(props) {
 
     const paperTheme = useTheme();
 
-    const { signOut, toggleTheme } = React.useContext(AuthContext);
+    const { signOut } = React.useContext(UserContext);
 
     return(
         <View style={{flex:1}}>
@@ -112,16 +112,6 @@ export function DrawerContent(props) {
                             label="Support"
                             onPress={() => {props.navigation.navigate('SupportScreen')}}
                         />
-                    </Drawer.Section>
-                    <Drawer.Section title="Preferences">
-                        <TouchableRipple onPress={() => {toggleTheme()}}>
-                            <View style={styles.preference}>
-                                <Text>Dark Theme</Text>
-                                <View pointerEvents="none">
-                                    <Switch value={paperTheme.dark}/>
-                                </View>
-                            </View>
-                        </TouchableRipple>
                     </Drawer.Section>
                 </View>
             </DrawerContentScrollView>

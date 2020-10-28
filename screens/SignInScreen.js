@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useContext,useEffect}from 'react';
 import { 
     View, 
     Text, 
@@ -16,7 +16,7 @@ import Feather from 'react-native-vector-icons/Feather';
 
 import { useTheme } from 'react-native-paper';
 
-import { AuthContext } from '../components/context';
+import UserContext from'../context/userContext/UserContext'; 
 
 import users from '../model/users';
 import variables from'../styles/variables'
@@ -34,7 +34,7 @@ const SignInScreen = ({navigation}) => {
     });
     const { colors } = useTheme();
 
-    const { signIn } = React.useContext(AuthContext);
+    const { signIn } = useContext(UserContext);
 
     const textInputChange = (val) => {
         if( val.trim().length >= 4 ) {
@@ -113,7 +113,7 @@ const SignInScreen = ({navigation}) => {
             }
             else{
                 users.$user=user
-                signIn(users.$user);
+                    signIn(users.$user);                                 
             }
         } catch (error) {
             Alert.alert('No se puede acceder al servidor!', 'La conexion se ha perdido.', [
