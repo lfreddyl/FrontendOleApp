@@ -1,4 +1,4 @@
-import React ,{useContext,useEffect}from 'react';
+import React ,{useContext}from 'react';
 import { 
     View, 
     Text, 
@@ -16,7 +16,7 @@ import Feather from 'react-native-vector-icons/Feather';
 
 import { useTheme } from 'react-native-paper';
 
-import UserContext from'../context/userContext/UserContext'; 
+import AuthContext from'../context/AuthContext'; 
 
 import users from '../model/users';
 import variables from'../styles/variables'
@@ -34,7 +34,7 @@ const SignInScreen = ({navigation}) => {
     });
     const { colors } = useTheme();
 
-    const { signIn } = useContext(UserContext);
+    const { signIn } = useContext(AuthContext);
 
     const textInputChange = (val) => {
         if( val.trim().length >= 4 ) {

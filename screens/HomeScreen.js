@@ -1,17 +1,18 @@
-import React from 'react';
-import { Image,View,ScrollView, Text, Button, StyleSheet, StatusBar,TouchableOpacity } from 'react-native';
+import React, { useContext, useEffect,Fragment } from 'react';
+import {View,ScrollView, Text , StyleSheet, StatusBar,TouchableOpacity,ImageBackground } from 'react-native';
 import { useTheme } from '@react-navigation/native';
+import {Separator,ListItem,Thumbail,Left,Body} from 'native-base'
 import variables from'../styles/variables';
 import global from'../styles/global';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import axios from 'axios'
-import Tiendas from'../components/Tiendas'
+import ProductContext from'../context/productContext/ProductContext'
 import * as Animatable from 'react-native-animatable';
 const HomeScreen = ({navigation}) => {
-  const { colors } = useTheme();
-
-  const theme = useTheme();
-  
+  const uri = "https://facebook.github.io/react-native/docs/assets/favicon.png";
+  const {obtenerTiendas,tiendas,error}=useContext(ProductContext)
+  useEffect(()=>{
+    obtenerTiendas()
+  },[])
     return (
       <View style={styles.container}>
         <StatusBar backgroundColor='#03273A' color='#fff' />
@@ -54,21 +55,39 @@ const HomeScreen = ({navigation}) => {
                 </TouchableOpacity>
             </View>    
         </View>
+       
         <Animatable.View 
         animation="bounceIn"
-        style={[styles.footer,global.contenido1_column]}>
-        <View style={[global.contenido2_column,{borderBottomWidth:0.5,borderBottomColor:variables.$color_border}]}>
+        style={[styles.footer]}>
         <ScrollView
-          horizontal={true}
-          decelerationRate="fast"
+        nestedScrollEnabled={false}>
           
-        >  
-        </ScrollView>
-        </View>
-        <View style={global.contenido3_column}>
-          <Text>CATEGORIAS</Text>
-          <Tiendas></Tiendas>
-        </View>
+        <View style={{width:'100%',justifyContent:"center",alignItems:'center'}} >
+        
+              
+                {tiendas.map(tiendas=>{
+                  const{img,description,_id}=tiendas;
+                  
+                  return(
+              
+                    <Fragment key={_id}>
+                     <View style={{
+                       marginVertical:10
+
+                      }}>
+                      <TouchableOpacity onPress={()=>navigation.navigate('ListaTiendas')}>
+
+                      <ImageBackground source={{uri:img}} style={[styles.image]}>
+                      <Text style={{top:10,fontWeight:'bold', fontSize:15,backgroundColor:variables.$color10,paddingVertical:10, width:150,borderTopRightRadius:20,borderBottomRightRadius:20,color:variables.$color9}}>{description}</Text>
+                      </ImageBackground>
+                      </TouchableOpacity>
+                    </View>
+                    </Fragment>
+                  )
+                
+                })}
+          </View>
+          </ScrollView>
         </Animatable.View>
       </View>
     );
@@ -81,6 +100,7 @@ const styles = StyleSheet.create({
     flexDirection:'column',
     flex: 1, 
     fontFamily:'Poppins-Medium',
+    backgroundColor:variables.$color_fondo
   },
   header: {
     paddingTop:10,
@@ -89,9 +109,11 @@ const styles = StyleSheet.create({
     paddingHorizontal:10,
     flex:1,
   },
-  logo:{
-    width:80,
-    height:80
+  image: {
+    width:250,
+    height:100,
+    alignItems:"flex-start",
+    
   }
   ,
   header_localidad:{
@@ -107,9 +129,10 @@ const styles = StyleSheet.create({
   }
   ,
   footer: {
-    flex: 10,
+    flex: 11,
     backgroundColor: variables.$color9,
-    paddingVertical: 30
+    paddingTop:10,
+    alignItems:"center"
   },
   text_header: {
       color: variables.$color4_text_header,

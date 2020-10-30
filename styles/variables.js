@@ -20,9 +20,11 @@ $color9:'#fff',
 $color10:'#E65100',
 
 $color11:'#E65100',
+$color_resaltado:'#D5DF04',
 //varibales
-$UrlApi:'https://oleapi2.herokuapp.com/'
+$UrlApi:'https://oleapi2.herokuapp.com/',
 
+$color_fondo:'#fff'
 
 }
 

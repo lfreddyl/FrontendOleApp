@@ -1,12 +1,13 @@
 import { StyleSheet } from 'react-native';
+import variables from './variables';
 
 
 const globalStyles=StyleSheet.create({
     contenedor:{
         flex:1,
         width:'100%',
-        position:'absolute',
         fontFamily:'Poppins-Medium',
+        
     },
     contenido1_row:{
         flexDirection:'row',

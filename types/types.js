@@ -1,0 +1,1 @@
+export const OBTENER_TIENDAS ='OBTENER_TIENDAS'

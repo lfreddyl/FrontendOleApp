@@ -2,9 +2,7 @@ import React from 'react';
 import { 
     View, 
     Text, 
-    Button, 
     TouchableOpacity, 
-    Dimensions,
     TextInput,
     Platform,
     StyleSheet,

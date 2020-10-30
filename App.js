@@ -5,7 +5,7 @@ import {
   NavigationContainer, 
 } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-
+import AsyncStorage from '@react-native-community/async-storage';
 import { DrawerContent } from './screens/DrawerContent';
 
 import MainTabScreen from './screens/MainTabScreen';
@@ -14,7 +14,8 @@ import SettingsScreen from './screens/SettingsScreen';
 import BookmarkScreen from './screens/BookmarkScreen';
 import RootStackScreen from './screens/RootStackScreen';
 import NetInfo from'@react-native-community/netinfo';
-import UserContext from'./context/userContext/UserContext'; 
+import AuthContext from'./context/AuthContext'; 
+import ProductState from'./context/productContext/ProductState'
 const Drawer = createDrawerNavigator();
 
 const App= ()=>{
@@ -25,6 +26,7 @@ const App= ()=>{
     name: null,
     _id: null,
   };   
+
   const UserReducer = (prevState, action) => {
     switch( action.type ) {
       case 'RETRIEVE_TOKEN': 
@@ -63,7 +65,7 @@ const App= ()=>{
     console.log("Is connected?", state.isConnected);
   });
 
-  const userContext = React.useMemo(() => ({
+  const authContext = React.useMemo(() => ({
     signIn: async(user) => {
       // set_id('fgkj');
       // setIsLoading(false);
@@ -92,9 +94,7 @@ const App= ()=>{
       // set_id('fgkj');
       // setIsLoading(false);
     },
-    toggleTheme: () => {
-      setIsDarkTheme( isDarkTheme => !isDarkTheme );
-    }
+
   }), []);
 
   useEffect(() => {
@@ -108,12 +108,9 @@ const App= ()=>{
         console.log(e);
       }
       // console.log('user token: ', _id);
-      dispatch({ type: 'RETRIEVE_TOKEN', _id: _id });
+      dispatch({ type: 'RETRIEVE_TOKEN', _id: '423424243'});
     }, 1000);
   }, []);
-
- 
-  
 
   if(state.isLoading) {
     return(
@@ -123,7 +120,8 @@ const App= ()=>{
     );
   }
   return (
-        <UserContext.Provider value={userContext}>
+      <AuthContext.Provider value={authContext}>
+      <ProductState>
        <NavigationContainer >
       { state._id !== null ? (
         <Drawer.Navigator drawerContent={props => <DrawerContent {...props} />}>
@@ -137,7 +135,8 @@ const App= ()=>{
       <RootStackScreen/>
     }
     </NavigationContainer>
-    </UserContext.Provider>
+    </ProductState>
+    </AuthContext.Provider>
   
    
   );

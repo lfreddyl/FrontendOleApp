@@ -1,15 +1,11 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import {
-    useTheme,
     Avatar,
     Title,
     Caption,
     Paragraph,
     Drawer,
-    Text,
-    TouchableRipple,
-    Switch
 } from 'react-native-paper';
 import {
     DrawerContentScrollView,
@@ -18,13 +14,12 @@ import {
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import UserContext from'../context/userContext/UserContext'; 
+import AuthContext from'../context/AuthContext'; 
 
 export function DrawerContent(props) {
 
-    const paperTheme = useTheme();
 
-    const { signOut } = React.useContext(UserContext);
+    const { signOut } = React.useContext(AuthContext);
 
     return(
         <View style={{flex:1}}>
