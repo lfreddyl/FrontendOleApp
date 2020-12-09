@@ -18,7 +18,7 @@ const SplashScreen = ({navigation}) => {
 
     return (
       <View style={styles.container}>
-          <StatusBar backgroundColor='#0F1317' barStyle="light-content"/>
+          <StatusBar  barStyle="light-content"/>
         <View style={styles.header}>
             <Animatable.Image 
                 animation="zoomInDown"
@@ -31,25 +31,27 @@ const SplashScreen = ({navigation}) => {
         </View>
         <Animatable.View 
             style={[styles.footer, {
-                backgroundColor: variables.$color9
+                backgroundColor: variables.$color_principal
             }]}
             animation="bounceInUp"
         >
             <Text style={[styles.title, {
-                color: colors.text
+                color: variables.$color_fuente_principal
             }]}>Tus pedidos en la mejores manos</Text>
-            <Text style={styles.text}>Ingresa a tu cuenta</Text>
+            <Text style={[styles.text,{color: variables.$color_fuente_principal}]}>Ingresa a tu cuenta</Text>
             <View style={styles.button}>
             <TouchableOpacity onPress={()=>navigation.navigate('SignInScreen')}>
                 <LinearGradient
-                    colors={[variables.$color10,variables.$color11]}
+                     start={{ x: 0, y: 0.5 }}
+                     end={{ x: 1, y: 0.5 }}
+                    colors={[variables.$color_gradiente1,variables.$color_gradiente2]}
                     style={styles.signIn}
                 >
                     <Text style={styles.textSign}>Comenzar</Text>
                     <MaterialIcons 
                         name="navigate-next"
-                        color="#fff"
-                        size={20}
+                        color="#12100e"
+                        size={23}
                     />
                 </LinearGradient>
             </TouchableOpacity>
@@ -68,7 +70,7 @@ const height_logo = height * 0.28;
 const styles = StyleSheet.create({
   container: {
     flex: 1, 
-    backgroundColor: variables.$color7
+    backgroundColor: variables.$color_principal
   },
   header: {
       flex: 3,
@@ -80,8 +82,8 @@ const styles = StyleSheet.create({
       backgroundColor: '#fff',
       paddingVertical: 50,
       paddingHorizontal: 30,
-      borderTopRightRadius:20,
-         borderTopLeftRadius:20
+ 
+        
   },
   logo: {
       width: height_logo,
@@ -94,7 +96,8 @@ const styles = StyleSheet.create({
   },
   text: {
       color: 'grey',
-      marginTop:5
+      marginTop:5,
+      fontSize: 15,
   },
   button: {
       alignItems: 'flex-end',
@@ -109,7 +112,8 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
   },
   textSign: {
-      color: 'white',
-      fontWeight: 'bold'
+      color: variables.$color_principal,
+      fontWeight: 'bold',
+      fontSize: 16
   }
 });

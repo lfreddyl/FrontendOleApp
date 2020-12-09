@@ -20,8 +20,8 @@ const MainTabScreen = () => (
       initialRouteName="Home"
       tabBarOptions={{
         inactiveTintColor: variables.$color9,
-        activeTintColor: variables.$color10,
-        style:[{backgroundColor:variables.$color7}]
+        activeTintColor: variables.$color_secundario,
+        style:[{backgroundColor:variables.$color_principal}]
       }
     }
       
@@ -99,7 +99,7 @@ const DetailsStackScreen = ({navigation}) => (
     }}>
         <DetailsStack.Screen name="Cuenta" component={DetailsScreen} options={{
         headerRight: () => (
-            <Icon.Button name="ios-menu" size={25} color="#FF4500" backgroundColor="#03273A" onPress={() => navigation.openDrawer()}></Icon.Button>
+            <Icon.Button name="ios-menu" size={25} color="#FF4500" backgroundColor="#03273A" ></Icon.Button>
         )
         }} />
         </DetailsStack.Navigator>

@@ -14,7 +14,6 @@ import LinearGradient from 'react-native-linear-gradient';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 
-import { useTheme } from 'react-native-paper';
 
 import AuthContext from'../context/AuthContext'; 
 
@@ -126,7 +125,7 @@ const SignInScreen = ({navigation}) => {
 
     return (
       <View style={styles.container}>
-          <StatusBar backgroundColor='#0F1317' barStyle="light-content"/>
+          <StatusBar backgroundColor='#12100e' barStyle="light-content"/>
         <View style={styles.header}>
             <Text style={styles.text_header}>Iniciar Sesión</Text>
         </View>
@@ -218,22 +217,19 @@ const SignInScreen = ({navigation}) => {
             <Text style={styles.errorMsg}>La Contraseña debe contener al menos 8 caracteres.</Text>
             </Animatable.View>
             }
-            
-
-            <TouchableOpacity>
-                <Text style={{color: variables.$color7, marginTop:15}}>Olvidaste tu Contraseña?</Text>
-            </TouchableOpacity>
             <View style={styles.button}>
                 <TouchableOpacity 
                     style={styles.signIn}
                     onPress={() => {loginHandle()}}
                 >
                 <LinearGradient
-                    colors={[variables.$color10,variables.$color11]}
+                    start={{ x: 0, y: 0.5 }}
+                    end={{ x: 1, y: 0.5 }}
+                    colors={[variables.$color_gradiente1,variables.$color_gradiente2]}
                     style={styles.signIn}
                 >
                     <Text style={[styles.textSign, {
-                        color:variables.$color9
+                        color:variables.$color_principal
                     }]}>Ingresar</Text>
                 </LinearGradient>
                 </TouchableOpacity>
@@ -241,7 +237,7 @@ const SignInScreen = ({navigation}) => {
                 <TouchableOpacity
                     onPress={() => navigation.navigate('SignUpScreen')}
                     style={[styles.signIn, {
-                        borderColor:variables.$color10,
+                        borderColor:variables.$color_secundario,
                         borderWidth:1.2,
                         marginTop: 15
                     }]}
@@ -251,6 +247,9 @@ const SignInScreen = ({navigation}) => {
                     }]}>Registrarse</Text>
                 </TouchableOpacity>
             </View>
+            <TouchableOpacity>
+                <Text style={{color: variables.$color7,fontSize:15, marginTop:15,textDecorationLine:'underline'}}>Olvidaste tu Contraseña?</Text>
+            </TouchableOpacity>
         </Animatable.View>
       </View>
     );
@@ -261,7 +260,7 @@ export default SignInScreen;
 const styles = StyleSheet.create({
     container: {
       flex: 1, 
-      backgroundColor: variables.$color7
+      backgroundColor: variables.$color_principal
     },
     header: {
         flex: 1,

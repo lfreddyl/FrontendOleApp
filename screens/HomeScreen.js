@@ -1,21 +1,14 @@
-import React, { useContext, useEffect,Fragment } from 'react';
-import {View,ScrollView, Text , StyleSheet, StatusBar,TouchableOpacity,ImageBackground } from 'react-native';
-import { useTheme } from '@react-navigation/native';
-import {Separator,ListItem,Thumbail,Left,Body} from 'native-base'
+import React from 'react';
+import {View, Text , StyleSheet,TouchableOpacity,Image } from 'react-native';
 import variables from'../styles/variables';
 import global from'../styles/global';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import ProductContext from'../context/productContext/ProductContext'
 import * as Animatable from 'react-native-animatable';
 const HomeScreen = ({navigation}) => {
-  const uri = "https://facebook.github.io/react-native/docs/assets/favicon.png";
-  const {obtenerTiendas,tiendas,error}=useContext(ProductContext)
-  useEffect(()=>{
-    obtenerTiendas()
-  },[])
+  
     return (
       <View style={styles.container}>
-        <StatusBar backgroundColor='#03273A' color='#fff' />
+
         <View style={[styles.header,global.contenido1_column]}>
           <View style={global.contenido1_row}>
           <TouchableOpacity 
@@ -42,7 +35,7 @@ const HomeScreen = ({navigation}) => {
             <View style={global.contenido1_row}>
             <FontAwesome 
                     name="search"
-                    color={variables.$color1}
+                    color={variables.$color_principal}
                     size={20}
                 />
                 <TouchableOpacity
@@ -50,7 +43,7 @@ const HomeScreen = ({navigation}) => {
                     onPress={() =>navigation.navigate("Buscar")}
                 >
                 <Text style={[styles.textSign, {
-                        color:variables.$color6_text_search
+                        color:variables.$color_principal
                 }]}>Buscar Tienda o Producto</Text>               
                 </TouchableOpacity>
             </View>    
@@ -58,36 +51,67 @@ const HomeScreen = ({navigation}) => {
        
         <Animatable.View 
         animation="bounceIn"
-        style={[styles.footer]}>
-        <ScrollView
-        nestedScrollEnabled={false}>
-          
-        <View style={{width:'100%',justifyContent:"center",alignItems:'center'}} >
-        
-              
-                {tiendas.map(tiendas=>{
-                  const{img,description,_id}=tiendas;
-                  
-                  return(
-              
-                    <Fragment key={_id}>
-                     <View style={{
-                       marginVertical:10
-
+        style={[styles.footer,{ borderBottomColor:variables.$color_border,
+          borderBottomWidth: 0.5}]}>
+        <View  style={{flex:1,flexDirection:'column'}}>
+        <View style={{flex:1,flexDirection:'row' , alignItems:"center"}} >
+        <View style={{
+                      flex:1,
+                      padding:10
                       }}>
-                      <TouchableOpacity onPress={()=>navigation.navigate('ListaTiendas')}>
+                      <TouchableOpacity style={{flex:1}}  onPress={()=>navigation.navigate('ListaTiendas')}>
 
-                      <ImageBackground source={{uri:img}} style={[styles.image]}>
-                      <Text style={{top:10,fontWeight:'bold', fontSize:15,backgroundColor:variables.$color10,paddingVertical:10, width:150,borderTopRightRadius:20,borderBottomRightRadius:20,color:variables.$color9}}>{description}</Text>
-                      </ImageBackground>
+                      <Image source={{uri:'https://www.transparenciaactiva.gob.sv/system/covers/images/000/006/433/large/comida_chatarra.jpg?1521735087'}} style={[styles.image]}/>
+                      <Text style={[styles.label_touch]}>Comida</Text>
+                      
                       </TouchableOpacity>
-                    </View>
-                    </Fragment>
-                  )
-                
-                })}
+        </View>
+        <View style={{
+                      flex:1,
+                      padding:10
+                      }}>
+                      <TouchableOpacity style={{flex:1}}  onPress={()=>navigation.navigate('ListaTiendas')}>
+
+                      <Image source={{uri:'https://cdn.lavoz.com.ar/sites/default/files/styles/width_1072/public/nota_periodistica/pernod-ricard_1574089335.jpg'}} style={[styles.image]}/>
+                      <Text style={[styles.label_touch]}>Alcohol y Bebidas</Text>
+                 
+                      </TouchableOpacity>
+        </View>
           </View>
-          </ScrollView>
+        </View>
+        <View  style={{flex:1,flexDirection:'column',  
+         borderBottomColor:variables.$color_border,borderBottomWidth: 0.5}}>
+        <View style={{flex:1,flexDirection:'row',alignItems:"center"}} >
+        <View style={{
+                      
+                      flex:1,
+                      padding:10
+                      }}>
+                      <TouchableOpacity style={{flex:1}} onPress={()=>navigation.navigate('ListaTiendas')}>
+
+                      <Image source={{uri:'https://www.bancaynegocios.com/wp-content/uploads/2020/04/Delivery-Caracas-Gastro-No-mia.jpg'}} style={[styles.image]}/>
+                      <Text style={[styles.label_touch]}>Pide lo que sea</Text>
+                      
+                      </TouchableOpacity>
+        </View>
+        <View style={{
+                      flex:1,
+                      padding:10
+                      }}>
+                      <TouchableOpacity style={{flex:1}} onPress={()=>navigation.navigate('ListaTiendas')}>
+
+                      <Image source={{uri:'https://www.deliverypedidos.com/wp-content/uploads/2020/06/delivery-pedidos-comida-a-domicilio-google.png'}} style={[styles.image]}/>
+                      <Text style={[styles.label_touch]}>Encomiendas</Text>
+                      
+                      </TouchableOpacity>
+        </View>
+        </View>
+        </View>
+        <View  style={{flex:1.5,flexDirection:'column'}}>
+        
+        </View>
+
+          
         </Animatable.View>
       </View>
     );
@@ -100,22 +124,30 @@ const styles = StyleSheet.create({
     flexDirection:'column',
     flex: 1, 
     fontFamily:'Poppins-Medium',
-    backgroundColor:variables.$color_fondo
+    marginHorizontal:'2.5%',
   },
   header: {
+    height:50,
     paddingTop:10,
     borderBottomColor:variables.$color_border,
     borderBottomWidth: 0.5,
-    paddingHorizontal:10,
-    flex:1,
+  },
+  label_touch:{
+    top:20,fontWeight:'bold', 
+    fontSize:14,
+    backgroundColor:variables.$color_secundario,
+    paddingVertical:10,
+    width:130,
+    borderTopRightRadius:20,
+    borderBottomRightRadius:20,
+    color:variables.$color_principal,
+    position: 'absolute',
   },
   image: {
-    width:250,
-    height:100,
-    alignItems:"flex-start",
-    
-  }
-  ,
+    flex: 1,
+     resizeMode:"cover",
+     borderRadius:20,
+  },
   header_localidad:{
     justifyContent:"center"
   },
@@ -130,9 +162,7 @@ const styles = StyleSheet.create({
   ,
   footer: {
     flex: 11,
-    backgroundColor: variables.$color9,
     paddingTop:10,
-    alignItems:"center"
   },
   text_header: {
       color: variables.$color4_text_header,
@@ -145,13 +175,11 @@ const styles = StyleSheet.create({
       fontSize: 18
   },
   action_busqueda: {
-    flex:1,
     marginTop: 10,
+    height:45,
     padding:10,
-    borderWidth:0.2,
     borderRadius:20,
-    marginHorizontal:'2.5%',    
-    borderColor:variables.$color5_text
+    backgroundColor:variables.$color_border
   },
   header_notification:{
     left:50

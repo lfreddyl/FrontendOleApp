@@ -1,7 +1,10 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
+import AuthContext from'../context/AuthContext'; 
+
 
 const DetailsScreen = ({navigation}) => {
+  const { signOut } = useContext(AuthContext);
     return (
       <View style={styles.container}>
         <Text>Details Screen</Text>
@@ -15,7 +18,7 @@ const DetailsScreen = ({navigation}) => {
         />
         <Button
             title="Go back"
-            onPress={() => navigation.goBack()}
+            onPress={() => signOut()}
         />
       </View>
     );
